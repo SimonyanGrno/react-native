@@ -1,5 +1,12 @@
+import { FC } from 'react';
 import { Text } from 'react-native';
 
 import s from './style';
 
-export const Task = () => <Text style={s.container}>Output</Text>;
+interface IProps {
+  taskNumber: number;
+}
+
+export const Task: FC<IProps> = ({ taskNumber }) => (
+  <Text style={s.container}>{taskNumber}</Text>
+);

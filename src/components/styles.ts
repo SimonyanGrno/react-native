@@ -13,6 +13,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 50,
   },
+  button: {
+    display: 'flex',
+    flexDirection: 'column',
+    // width: '50%',
+  },
 });
 
 export default styles;

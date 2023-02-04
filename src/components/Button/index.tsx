@@ -1,11 +1,15 @@
-import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { FC } from 'react';
+import { Pressable, StyleProp, Text, ViewStyle } from 'react-native';
 
 import s from './style';
 
-const Button = () => {
-  const handlePress = () => {};
+interface IProps {
+  title: number | string;
+  onPress: () => void;
+  style?: StyleProp<ViewStyle>;
+}
 
+const Button: FC<IProps> = ({ title, onPress }) => {
   return (
     <Pressable
       style={({ pressed }) => [
@@ -17,9 +21,9 @@ const Button = () => {
           color: pressed ? s.pressed.color : s.default.color,
         },
       ]}
-      onPress={handlePress}
+      onPress={onPress}
     >
-      <Text style={s.text}>Number</Text>
+      <Text style={s.text}>{title}</Text>
     </Pressable>
   );
 };
