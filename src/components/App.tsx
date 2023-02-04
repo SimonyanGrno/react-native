@@ -1,11 +1,29 @@
-import {Text, View} from 'react-native';
+import { View } from 'react-native';
 
-import s from '../styles/AppStyles';
+import s from '@styles/AppStyles';
+
+import { Task } from './Task';
+import { Button } from './Button';
 
 const App = () => {
   return (
     <View style={s.container}>
-      <Text>Hello RN</Text>
+      <Task />
+
+      <View style={s.buttonContainer}>
+        <Button />
+        <Button />
+      </View>
+
+      <View style={s.buttonContainer}>
+        <Button />
+        <Button />
+      </View>
+
+      <View style={s.buttonContainer}>
+        <Button />
+        <Button />
+      </View>
     </View>
   );
 };
