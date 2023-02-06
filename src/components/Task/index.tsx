@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 import s from './style';
 
@@ -8,5 +8,7 @@ interface IProps {
 }
 
 export const Task: FC<IProps> = ({ taskNumber }) => (
-  <Text style={s.container}>{taskNumber}</Text>
+  <View style={s.container}>
+    <Text style={s.text}>{taskNumber}</Text>
+  </View>
 );

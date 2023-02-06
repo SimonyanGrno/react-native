@@ -4,17 +4,21 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 5,
     paddingHorizontal: 20,
+    minWidth: 100,
+    alignItems: 'center',
   },
   default: {
-    backgroundColor: '#cecece',
-    color: 'green',
+    backgroundColor: '#474eb1',
+  },
+  selected: {
+    backgroundColor: '#2549db',
   },
   pressed: {
-    backgroundColor: '#d16a88',
-    color: 'yellow',
+    backgroundColor: '#2565db',
   },
   text: {
     fontSize: 30,
+    color: '#e9d7c4',
   },
 });
 
