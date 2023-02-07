@@ -1,19 +1,21 @@
 import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { View } from 'react-native';
+import { Dimensions, SafeAreaView, ScrollView } from 'react-native';
 
 import { generateNumbers, generateTaskNumber, INumbers } from '@utils/helpers';
 import { Numbers } from '@views/Numbers';
 
-import { Button, Task, Message } from './components';
+import { Button, Message, Task } from './components';
 import s from './styles';
 
 type GameStatus = 'playing' | 'win' | 'lost';
+type Layout = 'Portrait' | 'Landscape';
 
 const App = () => {
   const [numbers, setNumbers] = useState<INumbers[]>([]);
   const [taskNumber, setTaskNumber] = useState(0);
   const [sum, setSum] = useState(0);
   const [gameStatus, setGameStatus] = useState<GameStatus>('playing');
+  const [layout, setLayout] = useState<Layout>('Portrait');
   const hasGameFinished = useMemo(() => gameStatus !== 'playing', [gameStatus]);
 
   useEffect(() => {
@@ -63,26 +65,39 @@ const App = () => {
     setSum(0);
   };
 
+  const handleLayoutChange = () => {
+    const { height, width } = Dimensions.get('window');
+
+    const isPortrait = height >= width;
+
+    setLayout(isPortrait ? 'Portrait' : 'Landscape');
+  };
+
   return (
-    <View style={s.container}>
-      <Task taskNumber={taskNumber} />
+    <SafeAreaView
+      style={(s.container, [layout === 'Landscape' && s.landscape])}
+      onLayout={handleLayoutChange}
+    >
+      <ScrollView contentContainerStyle={s.scroll}>
+        <Task taskNumber={taskNumber} />
 
-      {renderMessage()}
+        {renderMessage()}
 
-      <Numbers
-        numbers={numbers}
-        setSum={setSum}
-        hasGameFinished={hasGameFinished}
-      />
-
-      {hasGameFinished && (
-        <Button
-          title="Restart"
-          onPress={handleRestartPress}
-          needToChangeActiveState={false}
+        <Numbers
+          numbers={numbers}
+          setSum={setSum}
+          hasGameFinished={hasGameFinished}
         />
-      )}
-    </View>
+
+        {hasGameFinished && (
+          <Button
+            title="Restart"
+            onPress={handleRestartPress}
+            needToChangeActiveState={false}
+          />
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
